@@ -9,13 +9,37 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack{
+            ScrollView {
+                VStack{
+                    NavigationLink(destination: DetailCardView()){
+                        SummaryCard()
+                    }
+                    NavigationLink(destination: DetailCardView()){
+                        SummaryCard()
+                    }
+                    NavigationLink(destination: DetailCardView()){
+                        SummaryCard()
+                    }
+                    NavigationLink(destination: DetailCardView()){
+                        SummaryCard()
+                    }
+                    NavigationLink(destination: DetailCardView()){
+                        SummaryCard()
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("PrepWise AI")
+            .toolbar{
+                ToolbarItem{
+                    Button("Add Item", systemImage: "plus"){
+                        
+                    }
+                }
+            }
+            .background(Color(.systemGroupedBackground))
         }
-        .padding()
     }
 }
 
