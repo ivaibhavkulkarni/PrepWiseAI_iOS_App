@@ -15,7 +15,7 @@ struct SummaryCard: View {
                 Text("Artificial Intelligence")
                     .font(.title2)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.black)
+                    .foregroundColor(.primary)
                 
                 // Tags
                 HStack(spacing: 10) {
