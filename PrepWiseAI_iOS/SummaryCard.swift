@@ -33,8 +33,8 @@ struct SummaryCard: View {
                         .font(.caption)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 6)
-                        .background(Color.purple.opacity(0.15))
-                        .foregroundColor(.purple)
+                        .background(Color.blue.opacity(0.15))
+                        .foregroundColor(.blue)
                         .clipShape(Capsule())
                 }
                 
