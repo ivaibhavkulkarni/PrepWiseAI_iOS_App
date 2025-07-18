@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct SummaryCard: View {
+    let session: Session
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 12) {
                 // Title
-                Text("Artificial Intelligence")
+                Text(session.topicsToFocus)
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
                 
                 // Tags
                 HStack(spacing: 10) {
-                    Text("Experience: 1 Year")
+                    Text("Experience: \(session.experience)")
                         .font(.caption)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 6)
@@ -27,7 +29,7 @@ struct SummaryCard: View {
                         .foregroundColor(.blue)
                         .clipShape(Capsule())
                     
-                    Label("10 Q&A", systemImage: "questionmark.circle")
+                    Label("\(session.questions.count) Q&A", systemImage: "questionmark.circle")
                         .font(.caption)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 6)
@@ -36,12 +38,12 @@ struct SummaryCard: View {
                         .clipShape(Capsule())
                 }
                 
-                // Last Updated
+                // Last Updated (Placeholder - API doesn't provide this)
                 HStack(spacing: 4) {
                     Image(systemName: "calendar")
                         .font(.caption)
                         .foregroundColor(.gray)
-                    Text("Last Updated: 12 Jul 2025")
+                    Text("Last Updated: 12 Jul 2025") // Replace with actual date if available
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
@@ -61,6 +63,13 @@ struct SummaryCard: View {
 }
 
 #Preview {
-    SummaryCard()
+    SummaryCard(session: Session(
+        role: "Developer",
+        experience: "1 Year",
+        topicsToFocus: "Artificial Intelligence",
+        description: "AI session description",
+        questions: [
+            Question(question: "What is AI?", answer: "Artificial Intelligence is...")
+        ]
+    ))
 }
-

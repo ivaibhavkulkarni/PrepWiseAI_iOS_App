@@ -30,10 +30,10 @@ struct FetchServices {
         }
         
         // Decode data
-        let sessions = try JSONDecoder().decode([Session].self, from: data)
+        let decoded = try JSONDecoder().decode(SessionResponse.self, from: data)
         
         // Return Session
-        return sessions
+        return decoded.sessions
         
     }
 }

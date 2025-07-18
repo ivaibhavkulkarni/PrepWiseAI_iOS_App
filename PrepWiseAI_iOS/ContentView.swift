@@ -8,24 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = SessionViewModel()
+    
     var body: some View {
         NavigationStack{
             ScrollView {
                 VStack{
-                    NavigationLink(destination: DetailCardView()){
-                        SummaryCard()
-                    }
-                    NavigationLink(destination: DetailCardView()){
-                        SummaryCard()
-                    }
-                    NavigationLink(destination: DetailCardView()){
-                        SummaryCard()
-                    }
-                    NavigationLink(destination: DetailCardView()){
-                        SummaryCard()
-                    }
-                    NavigationLink(destination: DetailCardView()){
-                        SummaryCard()
+                    if viewModel.isLoading {
+                        ProgressView("Loading sessions...")
+                            .padding()
+                    } else if let errorMessage = viewModel.errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding()
+                    } else if viewModel.sessions.isEmpty {
+                        Text("No sessions available")
+                            .foregroundColor(.gray)
+                            .padding()
+                    } else {
+                        ForEach(viewModel.sessions, id: \.description) { session in
+                            NavigationLink(destination: DetailCardView()) {
+                                SummaryCard(session: session)
+                            }
+                        }
                     }
                 }
                 .padding()
@@ -39,6 +44,9 @@ struct ContentView: View {
                 }
             }
             .background(Color(.systemGroupedBackground))
+            .task {
+                await viewModel.fetchSessions()
+            }
         }
     }
 }
